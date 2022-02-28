@@ -1,3 +1,8 @@
+import math
+import time
+
+start_time = time.time()
+
 def nthTerm(index):
     nthTerm = 1 - index + index**2 - index**3 + index**4 - index**5 + index**6 - index**7 + index**8 - index**9 + index**10
     return nthTerm
@@ -17,3 +22,6 @@ def differenceBetweenTerms(sequence):
         else:
             sequenceOfDifferences += [1]
     return sequenceOfDifferences
+
+if __name__ == '__main__':
+    print("time elapsed: {:.2f}s".format(time.time() - start_time))

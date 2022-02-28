@@ -1,5 +1,7 @@
 import math
-import re
+import time
+
+start_time = time.time()
 
 #Problem Number 1 : Multiples of 3 or 5
 
@@ -9,7 +11,7 @@ def sumOfMultiplesOf3or5LowerThan(number):
     #loop through the numbers lower than and add if divisible by 3 or 5
         if x%3==0 or x%5==0:
             sum += x
-    print(sum)
+    return sum
 
 #Problem Number 2 : Even Fibonacci Numbers
 
@@ -23,7 +25,7 @@ def evenFibonacciNumbers(number):
         x = temp
         if temp % 2 == 0:
             sum += temp
-    print(sum)
+    return sum
 
 #Problem Number 3 : Largest Prime Factor
 
@@ -45,7 +47,7 @@ def largestPrimeFactor(number):
                 largestPrimeFactor = y
             elif assessIfPrime(divisor):
                 largestPrimeFactor = divisor
-    print(largestPrimeFactor)
+    return largestPrimeFactor
 
 #Problem Number 4 : Largest Palindrome Product
 
@@ -66,7 +68,6 @@ def largestPalindrome3Digits():
         for j in range(10):
             test = (high-i)*(high-j)
             if assessIfPalindrome(test):
-                print(test)
                 return test
 
 #Problem Number 6 : Sum Square Difference
@@ -80,7 +81,6 @@ def sumSquareDifference(firstNNumbers):
         sumOfSquares += square
     squaredSum = sumOfFirstNNumbers*sumOfFirstNNumbers
     differenceOfSquares = squaredSum - sumOfSquares
-    print(differenceOfSquares)
     return differenceOfSquares
 
 #Problem Number 7 : 10001th prime
@@ -92,9 +92,7 @@ def nthPrime(n):
         number += 1
         if assessIfPrime(number):
             nbOfPrimes +=1
-        if nbOfPrimes == n:
-            print(number)
-            return number
+    return number
 
 #Problem Number 8 : Largest Product of 1000-digit Number
 
@@ -109,7 +107,6 @@ def largestProduct(nDigitNumber, adjacent):
             product = product*int(number[j+i])
         if largestProduct < product:
             largestProduct = product
-    print(largestProduct)
     return largestProduct
 
 #Problem Number 9 : Special Pythagorean Triplet
@@ -125,7 +122,6 @@ def specialPythagoreanTriplet():
         for j in range((1000-i)//2+1,i):
             for k in range(0, j):
                 if i+j+k==1000 and assessIfPythagorean(k, j, i):
-                    print(i*j*k)
                     return i*j*k
 
 #Problem Number 10 : Summation of Primes
@@ -134,9 +130,8 @@ def summationOfPrimes(underN):
     sum = 0
     for i in range(underN+1):
         if assessIfPrime(i):
-            print(i)
             sum += i
-    print(sum)
+    return sum
 
 #Problem Number 11 : Largest Product in a Grid
 
@@ -165,6 +160,59 @@ def largestGridProduct():
                 largestProduct = maxP
     return largestProduct
 
+#Problem Number 69 : Totient Maximum
+
+def assessIfPrime(number):
+    for x in range(math.ceil(math.sqrt(number))+1):
+        if x!=0 and x!=1 and number%x==0:
+            return False
+        else:
+            continue
+    return True
+
+def phiFunction(number):
+    phi = 0
+    for n in range(number):
+        if gcd(n, number) == 1:
+            phi += 1
+    return phi
+
+"""""""""
+Shitty Non-Optimal Method with n^2
+
+def totientMax(number):
+    totientMax = 0
+    totientMaxRatio = 0
+    for n in range(1, number + 1):
+        ratio = n / phiFunction(n)
+        if totientMaxRatio < ratio:
+            totientMaxRatio = ratio
+            totientMax = n
+    return totientMax
+"""""""""
+
+#Epic Method
+
+def totientMax(number):
+    totientMax = 1
+    for n in range(1, number+1):
+        if assessIfPrime(n):
+            product = totientMax*n
+            if product > number:
+                return totientMax
+            else:
+                totientMax = product
+
+#Random Method I thought I needed, but didn't. I decided to keep it, might come in handy at some point.
+def primeFactors(number):
+    primeFactors = []
+    for n in range(1, math.ceil(math.sqrt(number))):
+        if number%n == 0:
+            if assessIfPrime(n):
+                primeFactors.append(n)
+            if assessIfPrime(number/n):
+                primeFactors.append(number/n)
+    return primeFactors
 
 if __name__ == '__main__':
-    print(largestGridProduct())
+    print("time elapsed: {:.2f}s".format(time.time() - start_time))

@@ -1,3 +1,8 @@
+import math
+import time
+
+start_time = time.perf_counter_ns()
+
 def assessIfPrime(number):
     for x in range(math.ceil(math.sqrt(number))+1):
         if x!=0 and x!=1 and number%x==0:
@@ -51,3 +56,7 @@ def primeFactors(number):
             if assessIfPrime(number/n):
                 primeFactors.append(number/n)
     return primeFactors
+
+if __name__ == '__main__':
+    print(totientMax(1000000))
+    print("time elapsed: {:.2f}ns".format(time.perf_counter_ns() - start_time))

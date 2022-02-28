@@ -1,3 +1,8 @@
+import math
+import time
+
+start_time = time.perf_counter_ns()
+
 def sumSquareDifference(firstNNumbers):
     sumOfFirstNNumbers = 0
     sumOfSquares = 0
@@ -7,5 +12,8 @@ def sumSquareDifference(firstNNumbers):
         sumOfSquares += square
     squaredSum = sumOfFirstNNumbers*sumOfFirstNNumbers
     differenceOfSquares = squaredSum - sumOfSquares
-    print(differenceOfSquares)
     return differenceOfSquares
+
+if __name__ == '__main__':
+    print(sumSquareDifference(100))
+    print("time elapsed: {:.2f}ns".format(time.perf_counter_ns() - start_time))

@@ -1,3 +1,8 @@
+import math
+import time
+
+start_time = time.perf_counter_ns()
+
 def assessIfPalindrome(number):
     strNumber = str(number)
     similarLetterOrder = 0
@@ -5,10 +10,8 @@ def assessIfPalindrome(number):
         if strNumber[i] == strNumber[len(strNumber)-i-1]:
             similarLetterOrder += 1
     if similarLetterOrder == len(strNumber)//2:
-        print("True")
         return True
     else:
-        print("False")
         return False
 
 def largestPalindrome3Digits():
@@ -17,6 +20,9 @@ def largestPalindrome3Digits():
         for j in range(10):
             test = (high-i)*(high-j)
             if assessIfPalindrome(test):
-                print(test)
                 return test
+
+if __name__ == '__main__':
+    print(largestPalindrome3Digits())
+    print("time elapsed: {:.2f}ns".format(time.perf_counter_ns() - start_time))
 
