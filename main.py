@@ -160,6 +160,37 @@ def largestGridProduct():
                 largestProduct = maxP
     return largestProduct
 
+#Problem Number 12 : Highest Divisible Triangular Number
+
+def divisors(number):
+    listOfDivisors = []
+    nbOfDivisors = 0
+    for n in range(1, math.ceil(math.sqrt(number)) +1):
+        if number%n==0:
+            listOfDivisors.append(n)
+            if number/n == n:
+                nbOfDivisors += 1
+            else:
+                nbOfDivisors += 2
+                listOfDivisors.append(number/n)
+    return nbOfDivisors, listOfDivisors
+
+def sumOfNaturalNumbers(n):
+    sumOfNaturalNumbers = 0
+    for n in range(n):
+        sumOfNaturalNumbers += n
+    return sumOfNaturalNumbers
+
+def hDTN(divisibility):
+    nbOfDivisors = 0
+    i = 0
+    while nbOfDivisors < divisibility:
+        i += 1
+        sum = sumOfNaturalNumbers(i)
+        nbOfDivisors = divisors(sum)[0]
+    return sum
+
+
 #Problem Number 69 : Totient Maximum
 
 def assessIfPrime(number):
