@@ -3,7 +3,6 @@ import time
 
 start_time = time.time()
 
-
 def assessIfPrime(number):
     if number==0 or number==1:
         return False

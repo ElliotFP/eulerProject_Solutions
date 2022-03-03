@@ -286,7 +286,49 @@ def largeSum(list):
     sum = sum//(10**(len(str(sum))-10))
     return sum
 
+#Problem Number 14 : Longest Collatz Sequence
 
+def collatzSequence(number):
+    sequence = []
+    while number != 1:
+        sequence.append(number)
+        if number%2==0:
+            number = number//2
+        else:
+            number = (number*3)+1
+    sequence.append(1)
+    return len(sequence), sequence
+
+def longestCollatz(underN):
+    longestLength = 0
+    maxN = 0
+    for n in range(1, underN):
+        if n%2!=0:
+            length = collatzSequence(n)[0]
+            if length > longestLength:
+                longestLength = length
+                maxN = n
+    return longestLength, maxN
+
+#Problem Number 15 : Lattice paths
+
+def latticePaths(squareGrid):
+    n = 2*(squareGrid)
+    k = (squareGrid)
+    denominator = math.factorial(n)
+    numerator = math.factorial(k)**2
+    return denominator/numerator
+
+#Problem Number 16 : Power Digit Sum
+
+def powDigSum(number):
+    strNumber = str(number)
+    sum = 0
+    for i in strNumber:
+        sum += int(i)
+    return sum
+
+#Problem Number 17 :
 
 if __name__ == '__main__':
     print("time elapsed: {:.2f}s".format(time.time() - start_time))
